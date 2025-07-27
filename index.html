@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopSphere - Modern E-Commerce</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-section {
+            background-image: url('https://placehold.co/1600x800/e2e8f0/4a5568?text=Summer+Collection');
+            background-size: cover;
+            background-position: center;
+        }
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-white">
+
+    <!-- Header -->
+    <header id="main-header" class="bg-black">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <a href="#">
+                    <img src="file:///Users/samgabriel/Downloads/VOID%20MLogo.png" alt="VOID Logo" class="h-8 w-auto">
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-white hover:text-indigo-300 transition">Home</a>
+                    <a href="#" class="text-white hover:text-indigo-300 transition">All Products</a>
+                    <a href="#" class="text-white hover:text-indigo-300 transition">Shop by Brand</a>
+                    <a href="#" class="text-white hover:text-indigo-300 transition">Contact Us</a>
+                </nav>
+
+                <!-- Header Icons -->
+                <div class="flex items-center space-x-4">
+                    <button class="text-white hover:text-indigo-300">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="text-white hover:text-indigo-300">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <button class="relative text-white hover:text-indigo-300">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="absolute -top-2 -right-2 bg-indigo-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                    </button>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-button" class="md:hidden text-white hover:text-indigo-300">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <a href="#" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-50">Home</a>
+            <a href="#" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-50">All Products</a>
+            <a href="#" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-50">Shop by Brand</a>
+            <a href="#" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-50">Contact Us</a>
+        </div>
+    </header>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section text-white h-[60vh] md:h-[80vh] flex items-center">
+            <div class="container mx-auto px-4 lg:px-8 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 text-shadow-lg">New Season Arrivals</h1>
+                <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">Discover the latest trends in fashion and accessories.</p>
+                <a href="#" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">Shop Now</a>
+            </div>
+        </section>
+
+        <!-- Featured Products -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4 lg:px-8">
+                <h2 class="text-left text-sm uppercase tracking-widest text-gray-500 mb-8">Black Flag - Phase 1</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
+                    <!-- Product Card 1 -->
+                    <div class="text-left">
+                        <div class="border border-gray-200">
+                            <img src="https://placehold.co/400x500/1f2937/9ca3af?text=Armor+Denim" alt="Armor Denim" class="w-full object-cover">
+                        </div>
+                        <h3 class="mt-3 text-xs text-gray-600 uppercase tracking-wider">5B' ARMOR DENIM</h3>
+                        <p class="mt-1 text-sm font-medium text-gray-900">Rs. 4,240.00</p>
+                    </div>
+                    <!-- Product Card 2 -->
+                    <div class="text-left">
+                        <div class="border border-gray-200">
+                            <img src="https://placehold.co/400x500/27272a/a1a1aa?text=Cuban+Shirt" alt="Concrete Cuban Shirt" class="w-full object-cover">
+                        </div>
+                        <h3 class="mt-3 text-xs text-gray-600 uppercase tracking-wider">22' CONCRETE CUBAN SHIRT</h3>
+                        <p class="mt-1 text-sm font-medium text-gray-900">Rs. 3,143.02</p>
+                    </div>
+                    <!-- Product Card 3 -->
+                    <div class="text-left">
+                        <div class="border border-gray-200">
+                            <img src="https://placehold.co/400x500/0c0a09/78716c?text=Tribal+Denim" alt="Tribal Onix Denim" class="w-full object-cover">
+                        </div>
+                        <h3 class="mt-3 text-xs text-gray-600 uppercase tracking-wider">TRIBAL ONIX DENIM 'SB'</h3>
+                        <p class="mt-1 text-sm font-medium text-gray-900">Rs. 3,250.00</p>
+                    </div>
+                    <!-- Product Card 4 -->
+                    <div class="text-left">
+                        <div class="border border-gray-200">
+                            <img src="https://placehold.co/400x500/171717/a3a3a3?text=Tribal+Tee" alt="Tribal Onix Tee" class="w-full object-cover">
+                        </div>
+                        <h3 class="mt-3 text-xs text-gray-600 uppercase tracking-wider">TRIBAL ONIX 'SB'</h3>
+                        <p class="mt-1 text-sm font-medium text-gray-900">Rs. 2,345.00</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Promo Banner -->
+        <section class="bg-indigo-700">
+            <div class="container mx-auto px-4 lg:px-8 py-12 text-white text-center">
+                <h2 class="text-3xl font-bold mb-2">End of Season Sale</h2>
+                <p class="text-lg mb-6">Get up to 50% off on selected items. Don't miss out!</p>
+                <a href="#" class="bg-white text-indigo-700 font-bold py-3 px-8 rounded-full hover:bg-gray-200 transition duration-300">Shop Sale</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto px-4 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- About -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">About ShopSphere</h4>
+                    <p class="text-gray-400">We are dedicated to bringing you the best products with the best service. Your one-stop shop for everything you need.</p>
+                </div>
+                <!-- Customer Service -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Customer Service</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Shipping & Returns</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">FAQ</a></li>
+                    </ul>
+                </div>
+                <!-- Follow Us -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Subscribe to our newsletter for the latest updates.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your Email" class="w-full rounded-l-md px-4 py-2 text-gray-800">
+                        <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-r-md">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-500">
+                <p>&copy; 2024 ShopSphere. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // JavaScript for sticky header
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('sticky-header', 'bg-white/95', 'backdrop-blur-sm');
+            } else {
+                header.classList.remove('sticky-header', 'bg-white/95', 'backdrop-blur-sm');
+            }
+        });
+    </script>
+
+</body>
+</html>

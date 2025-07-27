@@ -1,0 +1,38 @@
+/*
+  Although we are primarily using Tailwind CSS via the CDN,
+  you can add any custom CSS rules here if needed.
+  For example, for custom fonts, complex animations, or overriding specific Tailwind classes.
+*/
+
+body {
+    font-family: 'Inter', sans-serif; /* A nice, clean font from Google Fonts */
+}
+
+/* Custom styles for product card hover effect */
+.product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Custom animation for the cart modal */
+#cart-modal {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+#cart-modal > div {
+    animation: slideInUp 0.4s ease-out;
+}
+
+@keyframes slideInUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
