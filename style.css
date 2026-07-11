@@ -1,48 +1,205 @@
-/* VOID Clothings — supplemental styles on top of Tailwind (CDN). */
+/* VOID Clothings — deep-space design system (on top of Tailwind CDN). */
 
 :root {
     color-scheme: dark;
+    --violet: #8b5cf6;
+    --cyan:   #38bdf8;
 }
 
-html {
-    scroll-behavior: smooth;
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; }
+
+/* ---------- Cosmic background layers ---------- */
+
+/* Animated starfield canvas — fixed behind everything */
+#starfield {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    display: block;
 }
 
-body {
-    font-family: 'Inter', sans-serif;
+/* Static nebula wash painted with radial gradients */
+.nebula {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(60% 50% at 15% 10%, rgba(139, 92, 246, 0.18), transparent 60%),
+        radial-gradient(55% 45% at 90% 20%, rgba(56, 189, 248, 0.12), transparent 60%),
+        radial-gradient(70% 60% at 50% 110%, rgba(124, 58, 237, 0.14), transparent 60%);
 }
 
-/* Faint grid texture behind the hero */
-.hero-grid {
-    background-image:
-        linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-    background-size: 48px 48px;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 40%, transparent 100%);
-    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 40%, transparent 100%);
+/* ---------- Typography flourishes ---------- */
+
+.glow-text {
+    background: linear-gradient(120deg, var(--cyan), var(--violet));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 40px rgba(139, 92, 246, 0.35);
 }
 
-/* Infinite marquee */
-.marquee {
+.nav-link {
+    color: #6b6b85;
+    transition: color 0.2s ease;
+    position: relative;
+}
+.nav-link:hover { color: #e9e7f0; }
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -6px;
+    width: 0; height: 1px;
+    background: var(--cyan);
+    transition: width 0.25s ease;
+}
+.nav-link:hover::after { width: 100%; }
+
+/* ---------- Buttons ---------- */
+
+.btn-primary {
     display: inline-flex;
-    animation: marquee 30s linear infinite;
+    align-items: center;
+    gap: 0.5rem;
+    background: #e9e7f0;
+    color: #050507;
+    padding: 0.75rem 2rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+    border: 1px solid transparent;
+    transition: box-shadow 0.3s ease, transform 0.2s ease, background 0.3s ease;
+}
+.btn-primary:hover {
+    background: #ffffff;
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.45);
+    transform: translateY(-1px);
 }
 
-@keyframes marquee {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
+.btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 2rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 500;
+    border: 1px solid #1c1c2b;
+    color: #e9e7f0;
+    transition: border-color 0.3s ease, color 0.3s ease;
+}
+.btn-ghost:hover { border-color: var(--violet); color: #fff; }
+
+/* ---------- Hero orbits ---------- */
+
+.orbit-wrap {
+    position: absolute;
+    top: 50%;
+    right: -12%;
+    transform: translateY(-50%);
+    width: 640px;
+    height: 640px;
+    max-width: 70vw;
+    max-height: 70vw;
+    pointer-events: none;
+    opacity: 0.9;
+}
+@media (max-width: 900px) { .orbit-wrap { opacity: 0.35; right: -30%; } }
+
+.orbit {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    border-radius: 50%;
+    border: 1px solid rgba(233, 231, 240, 0.08);
+}
+.orbit-1 { width: 100%;  height: 100%; animation: spin 32s linear infinite; }
+.orbit-2 { width: 72%;   height: 72%;  border-color: rgba(56,189,248,0.12); animation: spin 22s linear infinite reverse; }
+.orbit-3 { width: 46%;   height: 46%;  border-color: rgba(139,92,246,0.14); }
+
+.orbit-dot {
+    position: absolute;
+    top: -4px; left: 50%;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 14px var(--cyan);
+}
+.orbit-dot-2 { background: var(--violet); box-shadow: 0 0 14px var(--violet); }
+
+.planet {
+    position: absolute;
+    inset: 0; margin: auto;
+    width: 22%; height: 22%;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 35% 30%, #a78bfa, #6d28d9 45%, #2e1065 80%);
+    box-shadow: 0 0 60px rgba(139, 92, 246, 0.5), inset -8px -8px 24px rgba(0,0,0,0.6);
 }
 
-/* Reduced-motion respect */
-@media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    .marquee { animation: none; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- Product cards ---------- */
+
+.product-card .card-frame {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #1c1c2b;
+    background: #0d0d17;
+    transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+}
+.product-card:hover .card-frame {
+    border-color: rgba(56, 189, 248, 0.4);
+    box-shadow: 0 0 30px rgba(56, 189, 248, 0.12);
+    transform: translateY(-4px);
+}
+.product-card .cat-id {
+    position: absolute;
+    top: 10px; left: 10px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: rgba(233,231,240,0.55);
+    z-index: 2;
 }
 
-/* Thin scrollbar inside the cart drawer */
+/* ---------- Manifesto orb ---------- */
+
+.cosmic-orb {
+    position: absolute;
+    width: 70%; height: 70%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 35%, rgba(139,92,246,0.5), rgba(56,189,248,0.15) 55%, transparent 72%);
+    filter: blur(6px);
+    animation: pulse 6s ease-in-out infinite;
+}
+@keyframes pulse {
+    0%, 100% { transform: scale(1);   opacity: 0.85; }
+    50%      { transform: scale(1.08); opacity: 1; }
+}
+
+/* ---------- Marquee ---------- */
+
+.marquee { display: inline-flex; animation: marquee 34s linear infinite; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ---------- Cart scrollbar ---------- */
+
 #cart-items::-webkit-scrollbar { width: 6px; }
-#cart-items::-webkit-scrollbar-thumb { background: #262626; border-radius: 3px; }
+#cart-items::-webkit-scrollbar-thumb { background: #1c1c2b; border-radius: 3px; }
 
-/* Hide number-input spinners if any inputs use type=number */
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .marquee, .orbit-1, .orbit-2, .cosmic-orb { animation: none; }
+}

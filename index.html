@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOID Clothings — Black Flag</title>
-    <meta name="description" content="VOID Clothings — streetwear engineered from the void. Black Flag Phase 1 out now.">
+    <title>VOID Clothings — Engineered from the Void</title>
+    <meta name="description" content="VOID Clothings — deep-space streetwear. Black Flag Phase 1, in orbit now. Limited run, no restocks.">
+    <meta name="theme-color" content="#050507">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -16,11 +17,14 @@
                     },
                     colors: {
                         void: {
-                            black: '#0a0a0a',
-                            panel: '#111111',
-                            line: '#262626',
-                            bone: '#e7e5e4',
-                            mute: '#78716c',
+                            black: '#050507',
+                            deep:  '#0a0a12',
+                            panel: '#0d0d17',
+                            line:  '#1c1c2b',
+                            bone:  '#e9e7f0',
+                            mute:  '#6b6b85',
+                            violet:'#8b5cf6',
+                            cyan:  '#38bdf8',
                         }
                     }
                 }
@@ -33,194 +37,224 @@
     <link rel="icon" href="assets/logo.svg">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-void-black text-void-bone font-sans antialiased">
+<body class="bg-void-black text-void-bone font-sans antialiased overflow-x-hidden">
 
-    <!-- Announcement bar -->
-    <div class="bg-void-bone text-void-black text-center text-[11px] tracking-[0.25em] uppercase font-mono py-2 px-4">
-        Black Flag · Phase 1 — Free shipping across India over Rs. 5,000
+    <!-- Animated starfield (drawn by script.js) -->
+    <canvas id="starfield" aria-hidden="true"></canvas>
+    <!-- Nebula wash -->
+    <div class="nebula" aria-hidden="true"></div>
+
+    <div class="relative z-10">
+
+    <!-- Telemetry bar -->
+    <div class="border-b border-void-line/70 text-void-mute font-mono text-[10px] tracking-[0.25em] uppercase">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 h-8 flex items-center justify-between">
+            <span class="hidden sm:inline">RA 18ʰ36ᵐ · DEC +38° · SECTOR VOID</span>
+            <span class="text-void-bone/70">◦ BLACK FLAG / PHASE 01 — IN ORBIT</span>
+            <span class="hidden sm:inline">FREE SHIPPING · IN &gt; RS.5,000</span>
+        </div>
     </div>
 
     <!-- Header -->
-    <header id="main-header" class="sticky top-0 z-40 bg-void-black/80 backdrop-blur border-b border-void-line transition-colors">
+    <header id="main-header" class="sticky top-0 z-40 bg-void-black/60 backdrop-blur-md border-b border-void-line/70">
         <div class="max-w-7xl mx-auto px-4 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <button id="mobile-menu-button" class="md:hidden text-void-bone w-8 text-left" aria-label="Menu">
                     <i class="fas fa-bars text-lg"></i>
                 </button>
 
-                <a href="#top" class="flex items-center">
+                <a href="#top" class="flex items-center gap-2 group">
                     <img src="assets/logo.svg" alt="VOID Clothings" class="h-6 w-auto">
                 </a>
 
-                <nav class="hidden md:flex items-center gap-8 text-[13px] uppercase tracking-widest">
-                    <a href="#shop" class="hover:text-white text-void-mute transition">Shop</a>
-                    <a href="#collection" class="hover:text-white text-void-mute transition">Black Flag</a>
-                    <a href="#about" class="hover:text-white text-void-mute transition">About</a>
-                    <a href="#contact" class="hover:text-white text-void-mute transition">Contact</a>
+                <nav class="hidden md:flex items-center gap-8 text-[12px] uppercase tracking-[0.2em]">
+                    <a href="#shop" class="nav-link">Shop</a>
+                    <a href="#collection" class="nav-link">Black Flag</a>
+                    <a href="#about" class="nav-link">Manifesto</a>
+                    <a href="#contact" class="nav-link">Transmit</a>
                 </nav>
 
                 <div class="flex items-center gap-5">
-                    <button class="hover:text-white text-void-mute transition" aria-label="Search"><i class="fas fa-search"></i></button>
-                    <button class="hover:text-white text-void-mute transition hidden sm:inline" aria-label="Account"><i class="far fa-user"></i></button>
-                    <button id="cart-button" class="relative hover:text-white text-void-bone transition" aria-label="Cart">
+                    <button class="text-void-mute hover:text-void-bone transition" aria-label="Search"><i class="fas fa-search"></i></button>
+                    <button class="text-void-mute hover:text-void-bone transition hidden sm:inline" aria-label="Account"><i class="far fa-user"></i></button>
+                    <button id="cart-button" class="relative text-void-bone hover:text-void-cyan transition" aria-label="Cart">
                         <i class="fas fa-bag-shopping"></i>
-                        <span id="cart-count" class="absolute -top-2 -right-2 bg-void-bone text-void-black text-[10px] font-bold rounded-full h-4 min-w-4 px-1 flex items-center justify-center">0</span>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-void-cyan text-void-black text-[10px] font-bold rounded-full h-4 min-w-4 px-1 flex items-center justify-center shadow-[0_0_10px_rgba(56,189,248,0.7)]">0</span>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Mobile menu -->
-        <div id="mobile-menu" class="hidden md:hidden border-t border-void-line bg-void-black">
-            <a href="#shop" class="block py-3 px-4 text-sm uppercase tracking-widest text-void-mute hover:text-white hover:bg-void-panel">Shop</a>
-            <a href="#collection" class="block py-3 px-4 text-sm uppercase tracking-widest text-void-mute hover:text-white hover:bg-void-panel">Black Flag</a>
-            <a href="#about" class="block py-3 px-4 text-sm uppercase tracking-widest text-void-mute hover:text-white hover:bg-void-panel">About</a>
-            <a href="#contact" class="block py-3 px-4 text-sm uppercase tracking-widest text-void-mute hover:text-white hover:bg-void-panel">Contact</a>
+        <div id="mobile-menu" class="hidden md:hidden border-t border-void-line bg-void-black/95 backdrop-blur">
+            <a href="#shop" class="block py-3 px-4 text-sm uppercase tracking-[0.2em] text-void-mute hover:text-void-bone hover:bg-void-panel">Shop</a>
+            <a href="#collection" class="block py-3 px-4 text-sm uppercase tracking-[0.2em] text-void-mute hover:text-void-bone hover:bg-void-panel">Black Flag</a>
+            <a href="#about" class="block py-3 px-4 text-sm uppercase tracking-[0.2em] text-void-mute hover:text-void-bone hover:bg-void-panel">Manifesto</a>
+            <a href="#contact" class="block py-3 px-4 text-sm uppercase tracking-[0.2em] text-void-mute hover:text-void-bone hover:bg-void-panel">Transmit</a>
         </div>
     </header>
 
     <main id="top">
         <!-- Hero -->
-        <section class="relative overflow-hidden border-b border-void-line">
-            <div class="absolute inset-0 hero-grid opacity-40"></div>
-            <div class="relative max-w-7xl mx-auto px-4 lg:px-8 py-28 md:py-40">
-                <p class="font-mono text-xs tracking-[0.35em] text-void-mute uppercase mb-6">Phase 01 / Out Now</p>
-                <h1 class="text-5xl md:text-8xl font-bold tracking-tight leading-[0.95] max-w-4xl">
-                    ENGINEERED<br>FROM THE VOID.
+        <section class="relative overflow-hidden">
+            <!-- Orbital rings -->
+            <div class="orbit-wrap" aria-hidden="true">
+                <div class="orbit orbit-1"><span class="orbit-dot"></span></div>
+                <div class="orbit orbit-2"><span class="orbit-dot orbit-dot-2"></span></div>
+                <div class="orbit orbit-3"></div>
+                <div class="planet"></div>
+            </div>
+
+            <div class="relative max-w-7xl mx-auto px-4 lg:px-8 py-28 md:py-44">
+                <p class="font-mono text-xs tracking-[0.35em] text-void-cyan/80 uppercase mb-6 flex items-center gap-3">
+                    <span class="inline-block w-8 h-px bg-void-cyan/50"></span> Phase 01 · Now in orbit
+                </p>
+                <h1 class="text-5xl md:text-8xl font-bold tracking-tight leading-[0.92] max-w-4xl">
+                    ENGINEERED<br>FROM THE <span class="glow-text">VOID</span>.
                 </h1>
-                <p class="mt-8 max-w-xl text-void-mute text-lg">
-                    Black Flag is our first drop — cut heavy, built for the street, made in limited numbers. When it's gone, it's gone.
+                <p class="mt-8 max-w-xl text-void-mute text-lg leading-relaxed">
+                    Black Flag is our first transmission — cut heavy, built for the dark between stars,
+                    released in limited numbers. Once it exits orbit, it's gone.
                 </p>
                 <div class="mt-10 flex flex-wrap gap-4">
-                    <a href="#shop" class="bg-void-bone text-void-black px-8 py-3 text-sm uppercase tracking-widest font-medium hover:bg-white transition">Shop the drop</a>
-                    <a href="#collection" class="border border-void-line px-8 py-3 text-sm uppercase tracking-widest font-medium hover:border-void-bone transition">The story</a>
+                    <a href="#shop" class="btn-primary">Enter the drop</a>
+                    <a href="#about" class="btn-ghost">The manifesto</a>
                 </div>
+
+                <!-- Telemetry readout -->
+                <dl class="mt-16 grid grid-cols-3 gap-6 max-w-lg font-mono text-xs">
+                    <div><dt class="text-void-mute uppercase tracking-widest">Pieces</dt><dd class="text-2xl font-sans font-bold mt-1">08</dd></div>
+                    <div><dt class="text-void-mute uppercase tracking-widest">Run</dt><dd class="text-2xl font-sans font-bold mt-1">LTD</dd></div>
+                    <div><dt class="text-void-mute uppercase tracking-widest">Restocks</dt><dd class="text-2xl font-sans font-bold mt-1">00</dd></div>
+                </dl>
             </div>
         </section>
 
         <!-- Marquee -->
-        <div class="border-b border-void-line py-3 overflow-hidden">
+        <div class="border-y border-void-line/70 py-3 overflow-hidden bg-void-black/40">
             <div class="marquee font-mono text-xs tracking-[0.3em] uppercase text-void-mute whitespace-nowrap">
-                <span>VOID CLOTHINGS · BLACK FLAG · LIMITED RUN · MADE IN INDIA · NO RESTOCKS · VOID CLOTHINGS · BLACK FLAG · LIMITED RUN · MADE IN INDIA · NO RESTOCKS ·&nbsp;</span>
-                <span>VOID CLOTHINGS · BLACK FLAG · LIMITED RUN · MADE IN INDIA · NO RESTOCKS · VOID CLOTHINGS · BLACK FLAG · LIMITED RUN · MADE IN INDIA · NO RESTOCKS ·&nbsp;</span>
+                <span>VOID CLOTHINGS ✦ BLACK FLAG ✦ LIMITED RUN ✦ NO RESTOCKS ✦ MADE ON EARTH ✦ WORN IN ORBIT ✦ VOID CLOTHINGS ✦ BLACK FLAG ✦ LIMITED RUN ✦ NO RESTOCKS ✦ MADE ON EARTH ✦ WORN IN ORBIT ✦&nbsp;</span>
+                <span>VOID CLOTHINGS ✦ BLACK FLAG ✦ LIMITED RUN ✦ NO RESTOCKS ✦ MADE ON EARTH ✦ WORN IN ORBIT ✦ VOID CLOTHINGS ✦ BLACK FLAG ✦ LIMITED RUN ✦ NO RESTOCKS ✦ MADE ON EARTH ✦ WORN IN ORBIT ✦&nbsp;</span>
             </div>
         </div>
 
         <!-- Shop -->
-        <section id="shop" class="max-w-7xl mx-auto px-4 lg:px-8 py-16 md:py-24">
-            <div class="flex items-end justify-between mb-10">
+        <section id="shop" class="max-w-7xl mx-auto px-4 lg:px-8 py-20 md:py-28">
+            <div class="flex flex-wrap items-end justify-between gap-4 mb-12">
                 <div>
-                    <h2 id="collection" class="text-3xl md:text-4xl font-bold tracking-tight">Black Flag — Phase 1</h2>
-                    <p class="text-void-mute mt-2 font-mono text-xs tracking-widest uppercase">Select a piece</p>
+                    <p class="font-mono text-xs tracking-[0.35em] text-void-cyan/80 uppercase mb-3">The catalogue</p>
+                    <h2 id="collection" class="text-3xl md:text-5xl font-bold tracking-tight">Black Flag — Phase 1</h2>
                 </div>
-                <span class="hidden sm:block font-mono text-xs text-void-mute" id="product-count"></span>
+                <span class="font-mono text-xs text-void-mute" id="product-count"></span>
             </div>
 
-            <!-- Product grid: rendered by script.js -->
-            <div id="product-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 md:gap-x-6 md:gap-y-14"></div>
+            <div id="product-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 md:gap-x-6 md:gap-y-16"></div>
         </section>
 
-        <!-- About -->
-        <section id="about" class="border-y border-void-line bg-void-panel">
-            <div class="max-w-7xl mx-auto px-4 lg:px-8 py-20 grid md:grid-cols-2 gap-12 items-center">
+        <!-- Manifesto -->
+        <section id="about" class="relative border-y border-void-line/70 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-b from-void-violet/10 via-transparent to-void-cyan/5" aria-hidden="true"></div>
+            <div class="relative max-w-7xl mx-auto px-4 lg:px-8 py-24 grid md:grid-cols-2 gap-16 items-center">
                 <div>
-                    <p class="font-mono text-xs tracking-[0.35em] text-void-mute uppercase mb-5">Manifesto</p>
-                    <h2 class="text-3xl md:text-5xl font-bold tracking-tight leading-tight">Wear the absence of noise.</h2>
-                    <p class="mt-6 text-void-mute leading-relaxed">
-                        VOID is a study in restraint. Monochrome cuts, heavyweight fabric, and hardware that lasts.
-                        We drop in phases, in small runs, and we never restock. Every piece is a moment you either
-                        caught or missed.
+                    <p class="font-mono text-xs tracking-[0.35em] text-void-cyan/80 uppercase mb-5">Manifesto — 001</p>
+                    <h2 class="text-3xl md:text-5xl font-bold tracking-tight leading-[1.05]">Wear the<br>absence of light.</h2>
+                    <p class="mt-6 text-void-mute leading-relaxed max-w-md">
+                        VOID is a study in gravity and restraint. Monochrome cuts, heavyweight fabric,
+                        hardware built to survive re-entry. We release in phases, in small runs, and we never
+                        restock. Every piece is a window that either opened for you, or closed.
                     </p>
-                    <div class="mt-8 grid grid-cols-3 gap-6 font-mono text-xs uppercase tracking-widest">
+                    <div class="mt-10 grid grid-cols-3 gap-6 font-mono text-xs uppercase tracking-widest">
                         <div><div class="text-2xl font-sans font-bold text-void-bone">100%</div><div class="text-void-mute mt-1">Cotton</div></div>
                         <div><div class="text-2xl font-sans font-bold text-void-bone">300</div><div class="text-void-mute mt-1">GSM min</div></div>
                         <div><div class="text-2xl font-sans font-bold text-void-bone">01</div><div class="text-void-mute mt-1">Phase live</div></div>
                     </div>
                 </div>
-                <div class="aspect-[4/5] bg-void-black border border-void-line flex items-center justify-center overflow-hidden">
-                    <span class="font-mono text-[10rem] font-black text-white/5 select-none">V</span>
+                <div class="relative aspect-square flex items-center justify-center">
+                    <div class="cosmic-orb"></div>
+                    <span class="relative font-mono text-[11rem] leading-none font-black text-white/10 select-none">V</span>
                 </div>
             </div>
         </section>
 
-        <!-- Newsletter / Contact -->
-        <section id="contact" class="max-w-7xl mx-auto px-4 lg:px-8 py-20 text-center">
-            <p class="font-mono text-xs tracking-[0.35em] text-void-mute uppercase mb-5">Phase 2 incoming</p>
-            <h2 class="text-3xl md:text-5xl font-bold tracking-tight">Don't miss the next drop.</h2>
-            <p class="mt-4 text-void-mute max-w-md mx-auto">Join the list. Early access, no spam, just the void.</p>
-            <form id="newsletter-form" class="mt-8 flex max-w-md mx-auto">
-                <input type="email" required placeholder="your@email.com"
-                    class="w-full bg-transparent border border-void-line px-4 py-3 text-sm focus:outline-none focus:border-void-bone placeholder:text-void-mute">
-                <button class="bg-void-bone text-void-black px-6 py-3 text-sm uppercase tracking-widest font-medium hover:bg-white transition whitespace-nowrap">Join</button>
+        <!-- Transmit / Newsletter -->
+        <section id="contact" class="relative max-w-3xl mx-auto px-4 lg:px-8 py-24 md:py-32 text-center">
+            <p class="font-mono text-xs tracking-[0.35em] text-void-cyan/80 uppercase mb-5">Phase 02 — approaching</p>
+            <h2 class="text-3xl md:text-6xl font-bold tracking-tight">Signal us before<br>the next drop.</h2>
+            <p class="mt-6 text-void-mute max-w-md mx-auto">Join the transmission list. Early access, launch coordinates, no noise.</p>
+            <form id="newsletter-form" class="mt-10 flex max-w-md mx-auto">
+                <input type="email" required placeholder="you@somewhere.space"
+                    class="w-full bg-void-panel/60 border border-void-line px-4 py-3 text-sm font-mono focus:outline-none focus:border-void-cyan placeholder:text-void-mute transition">
+                <button class="btn-primary rounded-none whitespace-nowrap">Transmit</button>
             </form>
-            <p id="newsletter-msg" class="mt-4 font-mono text-xs text-void-mute h-4"></p>
+            <p id="newsletter-msg" class="mt-4 font-mono text-xs text-void-cyan h-4"></p>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-void-line">
-        <div class="max-w-7xl mx-auto px-4 lg:px-8 py-14 grid grid-cols-2 md:grid-cols-4 gap-8">
+    <footer class="border-t border-void-line/70 bg-void-black/60">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 py-16 grid grid-cols-2 md:grid-cols-4 gap-10">
             <div class="col-span-2 md:col-span-1">
                 <img src="assets/logo.svg" alt="VOID" class="h-6 w-auto mb-4">
-                <p class="text-void-mute text-sm max-w-xs">Streetwear engineered from the void. Made in limited numbers, in India.</p>
+                <p class="text-void-mute text-sm max-w-xs leading-relaxed">Deep-space streetwear. Released in limited numbers, from Earth.</p>
             </div>
             <div>
-                <h4 class="text-xs uppercase tracking-widest text-void-mute mb-4">Shop</h4>
+                <h4 class="text-xs uppercase tracking-[0.2em] text-void-mute mb-4">Shop</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="#shop" class="text-void-bone hover:text-white">Black Flag</a></li>
-                    <li><a href="#shop" class="text-void-bone hover:text-white">All products</a></li>
-                    <li><a href="#contact" class="text-void-bone hover:text-white">Gift cards</a></li>
+                    <li><a href="#shop" class="text-void-bone hover:text-void-cyan transition">Black Flag</a></li>
+                    <li><a href="#shop" class="text-void-bone hover:text-void-cyan transition">All objects</a></li>
+                    <li><a href="#contact" class="text-void-bone hover:text-void-cyan transition">Gift cards</a></li>
                 </ul>
             </div>
             <div>
-                <h4 class="text-xs uppercase tracking-widest text-void-mute mb-4">Help</h4>
+                <h4 class="text-xs uppercase tracking-[0.2em] text-void-mute mb-4">Ground control</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="#" class="text-void-bone hover:text-white">Shipping & returns</a></li>
-                    <li><a href="#" class="text-void-bone hover:text-white">Size guide</a></li>
-                    <li><a href="#contact" class="text-void-bone hover:text-white">Contact us</a></li>
+                    <li><a href="#" class="text-void-bone hover:text-void-cyan transition">Shipping &amp; returns</a></li>
+                    <li><a href="#" class="text-void-bone hover:text-void-cyan transition">Size guide</a></li>
+                    <li><a href="#contact" class="text-void-bone hover:text-void-cyan transition">Contact</a></li>
                 </ul>
             </div>
             <div>
-                <h4 class="text-xs uppercase tracking-widest text-void-mute mb-4">Follow</h4>
+                <h4 class="text-xs uppercase tracking-[0.2em] text-void-mute mb-4">Frequencies</h4>
                 <div class="flex gap-5 text-lg text-void-mute">
-                    <a href="#" class="hover:text-white" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="hover:text-white" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-                    <a href="#" class="hover:text-white" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#" class="hover:text-void-cyan transition" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-void-cyan transition" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" class="hover:text-void-cyan transition" aria-label="X"><i class="fab fa-x-twitter"></i></a>
                 </div>
             </div>
         </div>
-        <div class="border-t border-void-line">
+        <div class="border-t border-void-line/70">
             <div class="max-w-7xl mx-auto px-4 lg:px-8 py-6 flex flex-col sm:flex-row justify-between items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-void-mute">
-                <p>&copy; <span id="year"></span> VOID Clothings</p>
-                <p>All rights reserved</p>
+                <p>&copy; <span id="year"></span> VOID Clothings · All signals reserved</p>
+                <p>Transmitting from Earth ✦ 40.7128° N</p>
             </div>
         </div>
     </footer>
 
+    </div><!-- /z-10 wrapper -->
+
     <!-- Cart drawer -->
     <div id="cart-modal" class="hidden fixed inset-0 z-50">
-        <div class="absolute inset-0 bg-black/70" data-cart-overlay></div>
-        <aside class="absolute right-0 top-0 h-full w-full max-w-md bg-void-black border-l border-void-line flex flex-col">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" data-cart-overlay></div>
+        <aside class="absolute right-0 top-0 h-full w-full max-w-md bg-void-deep border-l border-void-line flex flex-col shadow-[0_0_60px_rgba(139,92,246,0.15)]">
             <div class="flex items-center justify-between px-6 py-5 border-b border-void-line">
-                <h3 class="uppercase tracking-widest text-sm">Your bag</h3>
-                <button id="close-cart-button" class="text-void-mute hover:text-white text-xl" aria-label="Close">&times;</button>
+                <h3 class="uppercase tracking-[0.2em] text-sm">Cargo bay</h3>
+                <button id="close-cart-button" class="text-void-mute hover:text-void-bone text-xl" aria-label="Close">&times;</button>
             </div>
             <div id="cart-items" class="flex-1 overflow-y-auto px-6 py-4"></div>
             <div class="border-t border-void-line px-6 py-5">
                 <div class="flex justify-between items-center mb-4">
-                    <span class="uppercase tracking-widest text-xs text-void-mute">Subtotal</span>
+                    <span class="uppercase tracking-[0.2em] text-xs text-void-mute">Subtotal</span>
                     <span id="cart-total" class="text-lg font-medium">Rs. 0.00</span>
                 </div>
-                <button id="checkout-button" class="w-full bg-void-bone text-void-black py-3 text-sm uppercase tracking-widest font-medium hover:bg-white transition disabled:opacity-40 disabled:cursor-not-allowed">
-                    Checkout
+                <button id="checkout-button" class="btn-primary w-full justify-center disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none">
+                    Launch checkout
                 </button>
-                <p class="text-center text-void-mute text-[11px] font-mono mt-3">Taxes & shipping calculated at checkout</p>
+                <p class="text-center text-void-mute text-[11px] font-mono mt-3">Taxes &amp; shipping calculated at launch</p>
             </div>
         </aside>
     </div>
 
     <!-- Toast -->
-    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 translate-y-4 opacity-0 pointer-events-none bg-void-bone text-void-black px-5 py-3 text-sm uppercase tracking-widest font-medium transition-all duration-300 z-50"></div>
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 translate-y-4 opacity-0 pointer-events-none bg-void-bone text-void-black px-5 py-3 text-sm uppercase tracking-[0.15em] font-medium transition-all duration-300 z-50 shadow-[0_0_30px_rgba(56,189,248,0.4)]"></div>
 
     <script src="script.js"></script>
 </body>
