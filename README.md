@@ -2,7 +2,7 @@
 
 Streetwear brand storefront — **Black Flag, Phase 1**. A fast, self-contained single-page shop with a working cart.
 
-**Live:** https://samgabriel-here.github.io/VOID_Clothings/
+**Live:** https://void-clothings-seven.vercel.app/ (also mirrored at https://samgabriel-here.github.io/VOID_Clothings/)
 
 ## Features
 
