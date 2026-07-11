@@ -3,199 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopSphere - Modern E-Commerce</title>
+    <title>VOID Clothings — Black Flag</title>
+    <meta name="description" content="VOID Clothings — streetwear engineered from the void. Black Flag Phase 1 out now.">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['"Space Mono"', 'monospace'],
+                    },
+                    colors: {
+                        void: {
+                            black: '#0a0a0a',
+                            panel: '#111111',
+                            line: '#262626',
+                            bone: '#e7e5e4',
+                            mute: '#78716c',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        .hero-section {
-            background-image: url('https://placehold.co/1600x800/e2e8f0/4a5568?text=Summer+Collection');
-            background-size: cover;
-            background-position: center;
-        }
-        .sticky-header {
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease-in-out;
-        }
-    </style>
+    <link rel="icon" href="assets/logo.svg">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-white">
+<body class="bg-void-black text-void-bone font-sans antialiased">
+
+    <!-- Announcement bar -->
+    <div class="bg-void-bone text-void-black text-center text-[11px] tracking-[0.25em] uppercase font-mono py-2 px-4">
+        Black Flag · Phase 1 — Free shipping across India over Rs. 5,000
+    </div>
 
     <!-- Header -->
-    <header id="main-header" class="bg-black">
-        <div class="container mx-auto px-4 lg:px-8">
-            <div class="flex justify-between items-center py-4">
-                <!-- Logo -->
-                <a href="#">
-                    <img src="file:///Users/samgabriel/Downloads/VOID%20MLogo.png" alt="VOID Logo" class="h-8 w-auto">
+    <header id="main-header" class="sticky top-0 z-40 bg-void-black/80 backdrop-blur border-b border-void-line transition-colors">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <button id="mobile-menu-button" class="md:hidden text-void-bone w-8 text-left" aria-label="Menu">
+                    <i class="fas fa-bars text-lg"></i>
+                </button>
+
+                <a href="#top" class="flex items-center">
+                    <img src="assets/logo.svg" alt="VOID Clothings" class="h-6 w-auto">
                 </a>
 
-                <!-- Desktop Navigation -->
-                <nav class="hidden md:flex items-center space-x-8">
-                    <a href="#" class="text-white hover:text-indigo-300 transition">Home</a>
-                    <a href="#" class="text-white hover:text-indigo-300 transition">All Products</a>
-                    <a href="#" class="text-white hover:text-indigo-300 transition">Shop by Brand</a>
-                    <a href="#" class="text-white hover:text-indigo-300 transition">Contact Us</a>
+                <nav class="hidden md:flex items-center gap-8 text-[13px] uppercase tracking-widest">
+                    <a href="#shop" class="hover:text-white text-void-mute transition">Shop</a>
+                    <a href="#collection" class="hover:text-white text-void-mute transition">Black Flag</a>
+                    <a href="#about" class="hover:text-white text-void-mute transition">About</a>
+                    <a href="#contact" class="hover:text-white text-void-mute transition">Contact</a>
                 </nav>
 
-                <!-- Header Icons -->
-                <div class="flex items-center space-x-4">
-                    <button class="text-white hover:text-indigo-300">
-                        <i class="fas fa-search"></i>
-                    </button>
-                    <button class="text-white hover:text-indigo-300">
-                        <i class="fas fa-user"></i>
-                    </button>
-                    <button class="relative text-white hover:text-indigo-300">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="absolute -top-2 -right-2 bg-indigo-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
-                    </button>
-                    <!-- Mobile Menu Button -->
-                    <button id="mobile-menu-button" class="md:hidden text-white hover:text-indigo-300">
-                        <i class="fas fa-bars text-xl"></i>
+                <div class="flex items-center gap-5">
+                    <button class="hover:text-white text-void-mute transition" aria-label="Search"><i class="fas fa-search"></i></button>
+                    <button class="hover:text-white text-void-mute transition hidden sm:inline" aria-label="Account"><i class="far fa-user"></i></button>
+                    <button id="cart-button" class="relative hover:text-white text-void-bone transition" aria-label="Cart">
+                        <i class="fas fa-bag-shopping"></i>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-void-bone text-void-black text-[10px] font-bold rounded-full h-4 min-w-4 px-1 flex items-center justify-center">0</span>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
-            <a href="#" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-50">Home</a>
-            <a href="#" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-50">All Products</a>
-            <a href="#" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-50">Shop by Brand</a>
-            <a href="#" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-50">Contact Us</a>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-void-line bg-void-black">
+            <a href="#shop" class="block py-3 px-4 text-sm uppercase tracking-widest text-void-mute hover:text-white hover:bg-void-panel">Shop</a>
+            <a href="#collection" class="block py-3 px-4 text-sm uppercase tracking-widest text-void-mute hover:text-white hover:bg-void-panel">Black Flag</a>
+            <a href="#about" class="block py-3 px-4 text-sm uppercase tracking-widest text-void-mute hover:text-white hover:bg-void-panel">About</a>
+            <a href="#contact" class="block py-3 px-4 text-sm uppercase tracking-widest text-void-mute hover:text-white hover:bg-void-panel">Contact</a>
         </div>
     </header>
-    <main>
-        <!-- Hero Section -->
-        <section class="hero-section text-white h-[60vh] md:h-[80vh] flex items-center">
-            <div class="container mx-auto px-4 lg:px-8 text-center">
-                <h1 class="text-4xl md:text-6xl font-bold mb-4 text-shadow-lg">New Season Arrivals</h1>
-                <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">Discover the latest trends in fashion and accessories.</p>
-                <a href="#" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">Shop Now</a>
-            </div>
-        </section>
 
-        <!-- Featured Products -->
-        <section class="py-16 bg-white">
-            <div class="container mx-auto px-4 lg:px-8">
-                <h2 class="text-left text-sm uppercase tracking-widest text-gray-500 mb-8">Black Flag - Phase 1</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
-                    <!-- Product Card 1 -->
-                    <div class="text-left">
-                        <div class="border border-gray-200">
-                            <img src="https://placehold.co/400x500/1f2937/9ca3af?text=Armor+Denim" alt="Armor Denim" class="w-full object-cover">
-                        </div>
-                        <h3 class="mt-3 text-xs text-gray-600 uppercase tracking-wider">5B' ARMOR DENIM</h3>
-                        <p class="mt-1 text-sm font-medium text-gray-900">Rs. 4,240.00</p>
-                    </div>
-                    <!-- Product Card 2 -->
-                    <div class="text-left">
-                        <div class="border border-gray-200">
-                            <img src="https://placehold.co/400x500/27272a/a1a1aa?text=Cuban+Shirt" alt="Concrete Cuban Shirt" class="w-full object-cover">
-                        </div>
-                        <h3 class="mt-3 text-xs text-gray-600 uppercase tracking-wider">22' CONCRETE CUBAN SHIRT</h3>
-                        <p class="mt-1 text-sm font-medium text-gray-900">Rs. 3,143.02</p>
-                    </div>
-                    <!-- Product Card 3 -->
-                    <div class="text-left">
-                        <div class="border border-gray-200">
-                            <img src="https://placehold.co/400x500/0c0a09/78716c?text=Tribal+Denim" alt="Tribal Onix Denim" class="w-full object-cover">
-                        </div>
-                        <h3 class="mt-3 text-xs text-gray-600 uppercase tracking-wider">TRIBAL ONIX DENIM 'SB'</h3>
-                        <p class="mt-1 text-sm font-medium text-gray-900">Rs. 3,250.00</p>
-                    </div>
-                    <!-- Product Card 4 -->
-                    <div class="text-left">
-                        <div class="border border-gray-200">
-                            <img src="https://placehold.co/400x500/171717/a3a3a3?text=Tribal+Tee" alt="Tribal Onix Tee" class="w-full object-cover">
-                        </div>
-                        <h3 class="mt-3 text-xs text-gray-600 uppercase tracking-wider">TRIBAL ONIX 'SB'</h3>
-                        <p class="mt-1 text-sm font-medium text-gray-900">Rs. 2,345.00</p>
-                    </div>
+    <main id="top">
+        <!-- Hero -->
+        <section class="relative overflow-hidden border-b border-void-line">
+            <div class="absolute inset-0 hero-grid opacity-40"></div>
+            <div class="relative max-w-7xl mx-auto px-4 lg:px-8 py-28 md:py-40">
+                <p class="font-mono text-xs tracking-[0.35em] text-void-mute uppercase mb-6">Phase 01 / Out Now</p>
+                <h1 class="text-5xl md:text-8xl font-bold tracking-tight leading-[0.95] max-w-4xl">
+                    ENGINEERED<br>FROM THE VOID.
+                </h1>
+                <p class="mt-8 max-w-xl text-void-mute text-lg">
+                    Black Flag is our first drop — cut heavy, built for the street, made in limited numbers. When it's gone, it's gone.
+                </p>
+                <div class="mt-10 flex flex-wrap gap-4">
+                    <a href="#shop" class="bg-void-bone text-void-black px-8 py-3 text-sm uppercase tracking-widest font-medium hover:bg-white transition">Shop the drop</a>
+                    <a href="#collection" class="border border-void-line px-8 py-3 text-sm uppercase tracking-widest font-medium hover:border-void-bone transition">The story</a>
                 </div>
             </div>
         </section>
 
-        <!-- Promo Banner -->
-        <section class="bg-indigo-700">
-            <div class="container mx-auto px-4 lg:px-8 py-12 text-white text-center">
-                <h2 class="text-3xl font-bold mb-2">End of Season Sale</h2>
-                <p class="text-lg mb-6">Get up to 50% off on selected items. Don't miss out!</p>
-                <a href="#" class="bg-white text-indigo-700 font-bold py-3 px-8 rounded-full hover:bg-gray-200 transition duration-300">Shop Sale</a>
+        <!-- Marquee -->
+        <div class="border-b border-void-line py-3 overflow-hidden">
+            <div class="marquee font-mono text-xs tracking-[0.3em] uppercase text-void-mute whitespace-nowrap">
+                <span>VOID CLOTHINGS · BLACK FLAG · LIMITED RUN · MADE IN INDIA · NO RESTOCKS · VOID CLOTHINGS · BLACK FLAG · LIMITED RUN · MADE IN INDIA · NO RESTOCKS ·&nbsp;</span>
+                <span>VOID CLOTHINGS · BLACK FLAG · LIMITED RUN · MADE IN INDIA · NO RESTOCKS · VOID CLOTHINGS · BLACK FLAG · LIMITED RUN · MADE IN INDIA · NO RESTOCKS ·&nbsp;</span>
             </div>
+        </div>
+
+        <!-- Shop -->
+        <section id="shop" class="max-w-7xl mx-auto px-4 lg:px-8 py-16 md:py-24">
+            <div class="flex items-end justify-between mb-10">
+                <div>
+                    <h2 id="collection" class="text-3xl md:text-4xl font-bold tracking-tight">Black Flag — Phase 1</h2>
+                    <p class="text-void-mute mt-2 font-mono text-xs tracking-widest uppercase">Select a piece</p>
+                </div>
+                <span class="hidden sm:block font-mono text-xs text-void-mute" id="product-count"></span>
+            </div>
+
+            <!-- Product grid: rendered by script.js -->
+            <div id="product-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 md:gap-x-6 md:gap-y-14"></div>
+        </section>
+
+        <!-- About -->
+        <section id="about" class="border-y border-void-line bg-void-panel">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8 py-20 grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <p class="font-mono text-xs tracking-[0.35em] text-void-mute uppercase mb-5">Manifesto</p>
+                    <h2 class="text-3xl md:text-5xl font-bold tracking-tight leading-tight">Wear the absence of noise.</h2>
+                    <p class="mt-6 text-void-mute leading-relaxed">
+                        VOID is a study in restraint. Monochrome cuts, heavyweight fabric, and hardware that lasts.
+                        We drop in phases, in small runs, and we never restock. Every piece is a moment you either
+                        caught or missed.
+                    </p>
+                    <div class="mt-8 grid grid-cols-3 gap-6 font-mono text-xs uppercase tracking-widest">
+                        <div><div class="text-2xl font-sans font-bold text-void-bone">100%</div><div class="text-void-mute mt-1">Cotton</div></div>
+                        <div><div class="text-2xl font-sans font-bold text-void-bone">300</div><div class="text-void-mute mt-1">GSM min</div></div>
+                        <div><div class="text-2xl font-sans font-bold text-void-bone">01</div><div class="text-void-mute mt-1">Phase live</div></div>
+                    </div>
+                </div>
+                <div class="aspect-[4/5] bg-void-black border border-void-line flex items-center justify-center overflow-hidden">
+                    <span class="font-mono text-[10rem] font-black text-white/5 select-none">V</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter / Contact -->
+        <section id="contact" class="max-w-7xl mx-auto px-4 lg:px-8 py-20 text-center">
+            <p class="font-mono text-xs tracking-[0.35em] text-void-mute uppercase mb-5">Phase 2 incoming</p>
+            <h2 class="text-3xl md:text-5xl font-bold tracking-tight">Don't miss the next drop.</h2>
+            <p class="mt-4 text-void-mute max-w-md mx-auto">Join the list. Early access, no spam, just the void.</p>
+            <form id="newsletter-form" class="mt-8 flex max-w-md mx-auto">
+                <input type="email" required placeholder="your@email.com"
+                    class="w-full bg-transparent border border-void-line px-4 py-3 text-sm focus:outline-none focus:border-void-bone placeholder:text-void-mute">
+                <button class="bg-void-bone text-void-black px-6 py-3 text-sm uppercase tracking-widest font-medium hover:bg-white transition whitespace-nowrap">Join</button>
+            </form>
+            <p id="newsletter-msg" class="mt-4 font-mono text-xs text-void-mute h-4"></p>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white">
-        <div class="container mx-auto px-4 lg:px-8 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <!-- About -->
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">About ShopSphere</h4>
-                    <p class="text-gray-400">We are dedicated to bringing you the best products with the best service. Your one-stop shop for everything you need.</p>
-                </div>
-                <!-- Customer Service -->
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Customer Service</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Contact Us</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Shipping & Returns</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">FAQ</a></li>
-                    </ul>
-                </div>
-                <!-- Follow Us -->
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-pinterest"></i></a>
-                    </div>
-                </div>
-                <!-- Newsletter -->
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Newsletter</h4>
-                    <p class="text-gray-400 mb-4">Subscribe to our newsletter for the latest updates.</p>
-                    <form class="flex">
-                        <input type="email" placeholder="Your Email" class="w-full rounded-l-md px-4 py-2 text-gray-800">
-                        <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-r-md">Subscribe</button>
-                    </form>
+    <footer class="border-t border-void-line">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 py-14 grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="col-span-2 md:col-span-1">
+                <img src="assets/logo.svg" alt="VOID" class="h-6 w-auto mb-4">
+                <p class="text-void-mute text-sm max-w-xs">Streetwear engineered from the void. Made in limited numbers, in India.</p>
+            </div>
+            <div>
+                <h4 class="text-xs uppercase tracking-widest text-void-mute mb-4">Shop</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#shop" class="text-void-bone hover:text-white">Black Flag</a></li>
+                    <li><a href="#shop" class="text-void-bone hover:text-white">All products</a></li>
+                    <li><a href="#contact" class="text-void-bone hover:text-white">Gift cards</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xs uppercase tracking-widest text-void-mute mb-4">Help</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="text-void-bone hover:text-white">Shipping & returns</a></li>
+                    <li><a href="#" class="text-void-bone hover:text-white">Size guide</a></li>
+                    <li><a href="#contact" class="text-void-bone hover:text-white">Contact us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xs uppercase tracking-widest text-void-mute mb-4">Follow</h4>
+                <div class="flex gap-5 text-lg text-void-mute">
+                    <a href="#" class="hover:text-white" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-white" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" class="hover:text-white" aria-label="X"><i class="fab fa-x-twitter"></i></a>
                 </div>
             </div>
-            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-500">
-                <p>&copy; 2024 ShopSphere. All Rights Reserved.</p>
+        </div>
+        <div class="border-t border-void-line">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8 py-6 flex flex-col sm:flex-row justify-between items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-void-mute">
+                <p>&copy; <span id="year"></span> VOID Clothings</p>
+                <p>All rights reserved</p>
             </div>
         </div>
     </footer>
 
-    <script>
-        // JavaScript for mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
+    <!-- Cart drawer -->
+    <div id="cart-modal" class="hidden fixed inset-0 z-50">
+        <div class="absolute inset-0 bg-black/70" data-cart-overlay></div>
+        <aside class="absolute right-0 top-0 h-full w-full max-w-md bg-void-black border-l border-void-line flex flex-col">
+            <div class="flex items-center justify-between px-6 py-5 border-b border-void-line">
+                <h3 class="uppercase tracking-widest text-sm">Your bag</h3>
+                <button id="close-cart-button" class="text-void-mute hover:text-white text-xl" aria-label="Close">&times;</button>
+            </div>
+            <div id="cart-items" class="flex-1 overflow-y-auto px-6 py-4"></div>
+            <div class="border-t border-void-line px-6 py-5">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="uppercase tracking-widest text-xs text-void-mute">Subtotal</span>
+                    <span id="cart-total" class="text-lg font-medium">Rs. 0.00</span>
+                </div>
+                <button id="checkout-button" class="w-full bg-void-bone text-void-black py-3 text-sm uppercase tracking-widest font-medium hover:bg-white transition disabled:opacity-40 disabled:cursor-not-allowed">
+                    Checkout
+                </button>
+                <p class="text-center text-void-mute text-[11px] font-mono mt-3">Taxes & shipping calculated at checkout</p>
+            </div>
+        </aside>
+    </div>
 
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 translate-y-4 opacity-0 pointer-events-none bg-void-bone text-void-black px-5 py-3 text-sm uppercase tracking-widest font-medium transition-all duration-300 z-50"></div>
 
-        // JavaScript for sticky header
-        const header = document.getElementById('main-header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('sticky-header', 'bg-white/95', 'backdrop-blur-sm');
-            } else {
-                header.classList.remove('sticky-header', 'bg-white/95', 'backdrop-blur-sm');
-            }
-        });
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>

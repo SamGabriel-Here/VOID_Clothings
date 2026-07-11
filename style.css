@@ -1,38 +1,48 @@
-/*
-  Although we are primarily using Tailwind CSS via the CDN,
-  you can add any custom CSS rules here if needed.
-  For example, for custom fonts, complex animations, or overriding specific Tailwind classes.
-*/
+/* VOID Clothings — supplemental styles on top of Tailwind (CDN). */
+
+:root {
+    color-scheme: dark;
+}
+
+html {
+    scroll-behavior: smooth;
+}
 
 body {
-    font-family: 'Inter', sans-serif; /* A nice, clean font from Google Fonts */
+    font-family: 'Inter', sans-serif;
 }
 
-/* Custom styles for product card hover effect */
-.product-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* Faint grid texture behind the hero */
+.hero-grid {
+    background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 40%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 40%, transparent 100%);
 }
 
-.product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+/* Infinite marquee */
+.marquee {
+    display: inline-flex;
+    animation: marquee 30s linear infinite;
 }
 
-/* Custom animation for the cart modal */
-#cart-modal {
-    animation: fadeIn 0.3s ease-out;
+@keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+/* Reduced-motion respect */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .marquee { animation: none; }
 }
 
-#cart-modal > div {
-    animation: slideInUp 0.4s ease-out;
-}
+/* Thin scrollbar inside the cart drawer */
+#cart-items::-webkit-scrollbar { width: 6px; }
+#cart-items::-webkit-scrollbar-thumb { background: #262626; border-radius: 3px; }
 
-@keyframes slideInUp {
-    from { transform: translateY(50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
+/* Hide number-input spinners if any inputs use type=number */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
